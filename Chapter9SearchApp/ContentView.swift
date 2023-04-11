@@ -15,7 +15,11 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             PetListView(animals: petArray)
-        }.searchable(text: $searchText){
+        }.searchable(text: $searchText,  placement: .navigationBarDrawer(displayMode: .always), prompt: "Look for a pet"){
+            Text("Singing").searchCompletion("Canary")
+            Text("Croaking").searchCompletion("Frog")
+            Text("Grumpy").searchCompletion("Cat")
+            Divider()
             ForEach(petArray.filter {$0.hasPrefix(searchText)}, id: \.self) {
                 name in Text(name)
             }
